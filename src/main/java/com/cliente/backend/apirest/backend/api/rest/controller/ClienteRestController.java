@@ -5,6 +5,8 @@ import com.cliente.backend.apirest.backend.api.rest.entity.Cliente;
 import com.cliente.backend.apirest.backend.api.rest.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,11 @@ public class ClienteRestController {
     @GetMapping("/listar")
     public List<Cliente> listarCliente(){
         return cs.listarClientes();
+    }
+    
+    @GetMapping("/listar/page/{page}")
+    public Page<Cliente> listarCliente(@PathVariable Integer page){
+        return cs.listarClientesPage(PageRequest.of(page, 4));
     }
 
 
